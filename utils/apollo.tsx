@@ -7,7 +7,7 @@ import fetch from "isomorphic-unfetch";
 // TODO Get rid of this
 // Update the GraphQL endpoint to any instance of GraphQL that you like
 const GRAPHQL_URL = process.env.API_URL || "http://localhost:1337";
-
+console.log("WHat the entire fuck", GRAPHQL_URL)
 const link = createHttpLink({
   fetch, // Switches between unfetch & node-fetch for client & server.
   uri: GRAPHQL_URL + "/graphql"
