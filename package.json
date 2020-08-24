@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "predev": "yarn generate",
-    "prebuild": "yarn generate"
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
