@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery, DocumentNode } from "@apollo/react-hooks";
 
 interface Props {
-  children: any;
+  children: (data: any) => JSX.Element;
   query: DocumentNode;
-  id?: string;
+  id?: string | string[];
 }
 
 const Query = ({ children, query, id }: Props) => {

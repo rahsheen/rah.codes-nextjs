@@ -2,7 +2,11 @@ import React from "react";
 import { Stack, Box, Heading, Text } from "@chakra-ui/core";
 import Link from "next/link";
 
-function Feature({ article }) {
+interface FeatureProps {
+  article: any
+}
+
+function Feature({ article }: FeatureProps) {
   const { desc, title, image, ...rest } = article;
 
   const imageUrl =
@@ -21,7 +25,11 @@ function Feature({ article }) {
   );
 }
 
-const Articles = ({ articles }) => {
+interface ArticlesProps {
+  articles: Array<any>;
+}
+
+const Articles = ({ articles }: ArticlesProps) => {
   const leftArticlesCount = Math.ceil(articles.length / 5);
   const leftArticles = articles.slice(0, leftArticlesCount);
   const rightArticles = articles.slice(leftArticlesCount, articles.length);
