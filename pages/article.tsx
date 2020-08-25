@@ -12,7 +12,8 @@ const Article = () => {
         const imageUrl =
           process.env.NODE_ENV !== "development"
             ? article.image.url
-            : process.env.API_URL + article.image.url;
+            : process.env.NEXT_PUBLIC_API_URLAPI_URL + article.image.url;
+
         return (
           <div>
             <div

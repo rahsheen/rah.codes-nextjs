@@ -12,7 +12,7 @@ function Feature({ article }: FeatureProps) {
   const imageUrl =
     process.env.NODE_ENV !== "development"
       ? image.url
-      : process.env.API_URL + article.image.url;
+      : process.env.NEXT_PUBLIC_API_URL + article.image.url;
 
   return (
     <Link href={{ pathname: "article", query: { id: article.id } }}>
