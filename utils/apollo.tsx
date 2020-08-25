@@ -4,13 +4,14 @@ import withApollo from "next-with-apollo";
 import { createHttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
 
-// TODO Get rid of this
+// TODO Get rid of this whole file
+
 // Update the GraphQL endpoint to any instance of GraphQL that you like
-const GRAPHQL_URL = process.env.API_URL || "https://thawing-sea-49240.herokuapp.com";
+const GRAPHQL_URL = process.env.API_URL || "http://localhost:1337";
 
 const link = createHttpLink({
   fetch, // Switches between unfetch & node-fetch for client & server.
-  uri: GRAPHQL_URL + "/graphql"
+  uri: GRAPHQL_URL + "/graphql",
 });
 
 // Export a HOC from next-with-apollo
@@ -23,6 +24,6 @@ export default withApollo(
       link: link,
       cache: new InMemoryCache()
         //  rehydrate the cache using the initial data passed from the server:
-        .restore(initialState || {})
+        .restore(initialState || {}),
     })
 );
