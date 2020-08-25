@@ -19,9 +19,9 @@ export default function Home() {
             width="560"
             height="315"
             src="https://www.youtube.com/embed/0eJ7WacNuE8"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </Box>
         <Query query={ARTICLES_QUERY}>
