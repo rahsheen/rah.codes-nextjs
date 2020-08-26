@@ -2,11 +2,10 @@ overwrite: true
 schema: "http://localhost:1337/graphql"
 # documents: "src/**/*.graphql"
 generates:
-  types/models.ts:
+  ./types/models.d.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-react-apollo"
   # ./graphql.schema.json:
   #   plugins:
   #     - "introspection"
