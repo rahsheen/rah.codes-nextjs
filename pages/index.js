@@ -11,7 +11,6 @@ import { getLatestVideos } from "../lib/api";
 export default function Index({ allPosts, preview, latestVideos }) {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
-  console.log(latestVideos);
   const firstVideo = latestVideos[0];
 
   return (
@@ -55,16 +54,14 @@ export default function Index({ allPosts, preview, latestVideos }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPostsForHome(preview)) || [];
-
-  const videoData = (await getLatestVideos()) || [];
-  console.log(videoData);
+  const allPosts = (await getAllPostsForHome(preview).catch(console.error)) || [];
+  const videoData = await getLatestVideos().catch(console.error);
 
   return {
     props: {
       allPosts,
       preview,
-      latestVideos: videoData.items,
+      latestVideos: videoData?.items || [],
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
