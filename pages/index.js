@@ -54,7 +54,8 @@ export default function Index({ allPosts, preview, latestVideos }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPostsForHome(preview).catch(console.error)) || [];
+  //const allPosts = (await getAllPostsForHome(preview).catch(console.error)) || [];
+  const allPosts = [];
   const videoData = await getLatestVideos().catch(console.error);
 
   return {
