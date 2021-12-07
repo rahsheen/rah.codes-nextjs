@@ -9,7 +9,7 @@ import { SITE_NAME } from "@/lib/constants";
 import { getLatestVideos } from "../lib/api";
 
 export default function Index({ allPosts, preview, latestVideos }) {
-  const heroPost = allPosts[0];
+  const heroPost = allPosts[0]?.attributes;
   const morePosts = allPosts.slice(1);
   const firstVideo = latestVideos[0];
 
@@ -39,11 +39,11 @@ export default function Index({ allPosts, preview, latestVideos }) {
           {heroPost && (
             <HeroPost
               title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
+              coverImage={heroPost?.coverImage}
+              date={heroPost.createdAt}
+              author={heroPost?.author}
               slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+              excerpt={heroPost?.description}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
@@ -54,13 +54,12 @@ export default function Index({ allPosts, preview, latestVideos }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  //const allPosts = (await getAllPostsForHome(preview).catch(console.error)) || [];
-  const allPosts = [];
+  const allPosts = await getAllPostsForHome(preview).catch(console.error);
   const videoData = await getLatestVideos().catch(console.error);
 
   return {
     props: {
-      allPosts,
+      allPosts: allPosts?.data || [],
       preview,
       latestVideos: videoData?.items || [],
     },
