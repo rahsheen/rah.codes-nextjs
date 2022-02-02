@@ -1,5 +1,7 @@
-async function fetchAPI(query, { variables } = {}) {
-  const res = await fetch(`${process.env.STRAPI_URL}/graphql`, {
+import qs from "qs";
+
+async function fetchAPI(query: string, { variables } = {}) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,25 +51,42 @@ export async function getAllPostsWithSlug() {
   return data?.allPosts;
 }
 
-export async function getAllPostsForHome(preview) {
-  const res = await fetch(`${process.env.STRAPI_URL}/api/posts?populate=%2A`, {
-    headers: {
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-    },
-  });
+export async function getAllPostsForHome(_preview: any) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/posts?populate=%2A`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+      },
+    }
+  );
 
   if (!res.ok) {
     throw new Error(
-      `Failed to fetch posts ${res.status} ${res.statusText} ${process.env.STRAPI_URL} ${process.env.STRAPI_API_TOKEN}`
+      `Failed to fetch posts ${res.status} ${res.statusText} ${process.env.NEXT_PUBLIC_STRAPI_URL} ${process.env.STRAPI_API_TOKEN}`
     );
   }
 
   return res.json();
 }
 
-export async function getPostAndMorePosts(slug, preview) {
+export async function getPostAndMorePosts(slug: string, _preview: boolean) {
+  const query = qs.stringify(
+    {
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
+      populate: "*",
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+
   const res = await fetch(
-    `${process.env.STRAPI_URL}/api/posts?populate=%2A&slug=${slug}`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${query}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
@@ -80,6 +99,7 @@ export async function getPostAndMorePosts(slug, preview) {
   }
 
   const { data } = await res.json();
+  console.log(data[0].attributes);
 
   return data[0].attributes;
 }

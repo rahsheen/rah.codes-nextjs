@@ -1,7 +1,13 @@
 import Link from "next/link";
 
-export default function CoverImage({ title, url, slug }) {
-  const imageUrl = `${url.startsWith("/") ? process.env.STRAPI_URL : ""}${url}`;
+export default function CoverImage({ title, slug, coverImage }) {
+  const url = coverImage?.data?.attributes?.url;
+
+  const imageUrl = `${
+    url?.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_URL : ""
+  }${url}`;
+
+  console.log(`imageUrl: ${imageUrl}`);
 
   return (
     <div className="sm:mx-0">

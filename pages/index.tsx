@@ -22,7 +22,7 @@ export default function Index({ allPosts, preview, latestVideos }) {
         <Container>
           <Intro />
 
-          <section className="mb-8 md:mb-16 flex justify-center">
+          <section className="mb-8 md:mb-16 flex flex-wrap justify-center">
             {firstVideo && (
               <iframe
                 width="560"
@@ -34,18 +34,18 @@ export default function Index({ allPosts, preview, latestVideos }) {
                 allowFullScreen
               ></iframe>
             )}
-          </section>
 
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost?.coverImage}
-              date={heroPost.createdAt}
-              author={heroPost?.author}
-              slug={heroPost.slug}
-              excerpt={heroPost?.description}
-            />
-          )}
+            {heroPost && (
+              <HeroPost
+                title={heroPost.title}
+                coverImage={heroPost.coverImage}
+                date={heroPost.createdAt}
+                author={heroPost?.author}
+                slug={heroPost.slug}
+                excerpt={heroPost?.description}
+              />
+            )}
+          </section>
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
         </Container>
       </Layout>
