@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
@@ -13,7 +14,19 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import markdownToHtml from "@/lib/markdownToHtml";
 
-export default function Post({ post, morePosts, preview }) {
+import { remarkCodeHike } from "@code-hike/mdx";
+import { getMDXComponent } from "mdx-bundler/client";
+import { bundleMDX } from "mdx-bundler";
+
+function MDXComponent({ code }) {
+  const Component = useMemo(
+    () => getMDXComponent(code, { react: React }),
+    [code]
+  );
+  return <Component />;
+}
+
+export default function Post({ previewSource, post, morePosts, preview }) {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -35,11 +48,11 @@ export default function Post({ post, morePosts, preview }) {
               </Head>
               <PostHeader
                 title={post.title}
-                coverImage={post.coverImage.data.attributes}
+                coverImage={post?.coverImage?.data?.attributes}
                 date={post.date}
                 author={post.author}
               />
-              <PostBody content={post.content} />
+              <MDXComponent code={previewSource} />
             </article>
             <SectionSeparator />
             {morePosts.length > 0 && <MoreStories posts={morePosts} />}
@@ -54,9 +67,26 @@ export async function getStaticProps({ params, preview = null }) {
   const data = await getPostAndMorePosts(params.slug, preview);
   const content = await markdownToHtml(data?.content);
 
+  const loadedTheme = await import(`shiki/themes/monokai.json`).then(
+    (module) => module.default
+  );
+
+  const previewSource = await bundleMDX({
+    source: data?.content,
+    esbuildOptions(options) {
+      options.platform = "node";
+      return options;
+    },
+    xdmOptions(options) {
+      options.remarkPlugins = [[remarkCodeHike, { theme: loadedTheme }]];
+      return options;
+    },
+  });
+
   return {
     props: {
       preview,
+      previewSource: previewSource.code,
       post: {
         ...data,
         content,

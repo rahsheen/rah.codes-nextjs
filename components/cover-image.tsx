@@ -7,8 +7,6 @@ export default function CoverImage({ title, slug, coverImage }) {
     url?.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_URL : ""
   }${url}`;
 
-  console.log(`imageUrl: ${imageUrl}`);
-
   return (
     <div className="sm:mx-0">
       {slug ? (
