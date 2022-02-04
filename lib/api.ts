@@ -16,7 +16,7 @@ export async function getPreviewPostBySlug(slug: string) {
   );
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${query}`,
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/posts?${query}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
@@ -35,7 +35,7 @@ export async function getPreviewPostBySlug(slug: string) {
 
 export async function getAllPostsForHome() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/posts?populate=%2A`,
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/posts?populate=%2A`,
     {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
@@ -45,7 +45,7 @@ export async function getAllPostsForHome() {
 
   if (!res.ok) {
     throw new Error(
-      `Failed to fetch posts ${res.status} ${res.statusText} ${process.env.NEXT_PUBLIC_STRAPI_URL} ${process.env.STRAPI_API_TOKEN}`
+      `Failed to fetch posts ${res.status} ${res.statusText} ${process.env.NEXT_PUBLIC_STRAPI_API_URL} ${process.env.STRAPI_API_TOKEN}`
     );
   }
 
@@ -68,7 +68,7 @@ export async function getPostAndMorePosts(slug: string, _preview: boolean) {
   );
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${query}`,
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/posts?${query}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
