@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-export default function CoverImage({ title, slug, coverImage }) {
+export default function CoverImage({
+  title,
+  slug,
+  coverImage,
+}: {
+  title: string;
+  slug?: string;
+  coverImage: any;
+}) {
   const url = coverImage?.data?.attributes?.url;
 
   const imageUrl = `${

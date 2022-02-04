@@ -1,8 +1,14 @@
-import Alert from './alert'
-import Footer from './footer'
-import Meta from './meta'
+import Alert from "./alert";
+import Footer from "./footer";
+import Meta from "./meta";
 
-export default function Layout({ preview, children }) {
+export default function Layout({
+  preview,
+  children,
+}: {
+  preview: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <>
       <Meta />
@@ -12,5 +18,5 @@ export default function Layout({ preview, children }) {
       </div>
       <Footer />
     </>
-  )
+  );
 }

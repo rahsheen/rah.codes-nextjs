@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@code-hike/mdx": "^0.3.0-next.20",
-    "classnames": "2.2.6",
+    "@types/qs": "^6.9.7",
+    "classnames": "^2.3.1",
     "date-fns": "2.14.0",
     "esbuild": "^0.14.17",
     "graphql": "^15.3.0",

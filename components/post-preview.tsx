@@ -10,6 +10,13 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
+}: {
+  title: string;
+  coverImage: any;
+  date: string;
+  excerpt: string;
+  author: any;
+  slug: string;
 }) {
   return (
     <div>

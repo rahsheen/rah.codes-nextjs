@@ -8,7 +8,15 @@ import Head from "next/head";
 import { SITE_NAME } from "@/lib/constants";
 import { getLatestVideos } from "../lib/api";
 
-export default function Index({ allPosts, preview, latestVideos }) {
+export default function Index({
+  allPosts,
+  preview,
+  latestVideos,
+}: {
+  allPosts: any[];
+  preview: boolean;
+  latestVideos: any[];
+}) {
   const heroPost = allPosts[0]?.attributes;
   const morePosts = allPosts.slice(1);
   const firstVideo = latestVideos[0];
@@ -53,8 +61,8 @@ export default function Index({ allPosts, preview, latestVideos }) {
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const allPosts = await getAllPostsForHome(preview).catch(console.error);
+export async function getStaticProps({ preview = false }) {
+  const allPosts = await getAllPostsForHome().catch(console.error);
   const videoData = await getLatestVideos().catch(console.error);
 
   return {
