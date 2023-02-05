@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Container,
@@ -13,13 +15,13 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function CallToActionWithVideo({
+export const CallToActionWithVideo = ({
   details,
   children,
 }: {
-  details: string;
+  details?: string;
   children: React.ReactNode;
-}) {
+}) => {
   return (
     <Container maxW={"7xl"}>
       <Stack
@@ -55,26 +57,24 @@ export default function CallToActionWithVideo({
               Not Harder!
             </Text>
           </Heading>
-          <Text color={"gray.500"}>{details}</Text>
+          {details && <Text color={"gray.500"}>{details}</Text>}
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={{ base: "column", sm: "row" }}
           >
-            <Link href="https://www.youtube.com/c/RahCodes">
-              <a target="_blank">
-                <Button
-                  rounded={"full"}
-                  size={"lg"}
-                  fontWeight={"normal"}
-                  px={6}
-                  colorScheme={"red"}
-                  bg={"red.400"}
-                  _hover={{ bg: "red.500" }}
-                  leftIcon={<PlayIcon h={4} w={4} color={"yellow.300"} />}
-                >
-                  YouTube
-                </Button>
-              </a>
+            <Link target="_blank" href="https://www.youtube.com/c/RahCodes">
+              <Button
+                rounded={"full"}
+                size={"lg"}
+                fontWeight={"normal"}
+                px={6}
+                colorScheme={"red"}
+                bg={"red.400"}
+                _hover={{ bg: "red.500" }}
+                leftIcon={<PlayIcon h={4} w={4} color={"yellow.300"} />}
+              >
+                YouTube
+              </Button>
             </Link>
           </Stack>
         </Stack>
@@ -106,7 +106,7 @@ export default function CallToActionWithVideo({
       </Stack>
     </Container>
   );
-}
+};
 
 const PlayIcon = createIcon({
   displayName: "PlayIcon",

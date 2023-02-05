@@ -50,7 +50,8 @@ export async function getAllPostsForHome() {
     );
   }
 
-  return res.json();
+  const resJson = await res.json();
+  return resJson?.data;
 }
 
 export async function getPostAndMorePosts(slug: string, preview = false) {
@@ -85,19 +86,4 @@ export async function getPostAndMorePosts(slug: string, preview = false) {
   const { data } = await res.json();
 
   return data[0].attributes;
-}
-
-export async function getLatestVideos() {
-  const channelId = "UCy3jFrt6CwE0W072c7MVcEg";
-  const apiKey = process.env.GOOGLE_API_KEY;
-  const videosApiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=5&order=date&type=video&key=${apiKey}`;
-
-  if (!apiKey) {
-    throw new Error("No API key provided for YouTube API");
-  }
-
-  const resp = await fetch(videosApiUrl);
-  const data = await resp.json();
-
-  return data;
 }
