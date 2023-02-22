@@ -12,7 +12,7 @@ import { remarkCodeHike } from "@code-hike/mdx";
 import { getMDXComponent } from "mdx-bundler/client";
 import { bundleMDX } from "mdx-bundler";
 
-import { getAllPostsForHome, getPostAndMorePosts } from "../lib/api";
+import { getPostAndMorePosts, getAllPostsForHome } from "../lib/api";
 
 function MDXComponent({ code }: { code: string }) {
   const Component = useMemo(

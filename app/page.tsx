@@ -1,7 +1,7 @@
-import { getAllPostsForHome } from "../lib/api";
 import LatestVideo from "../app/YouTube";
 import { CallToActionWithVideo } from "../components/hero";
 import { BlogPosts } from "../components/blog-posts";
+import { getAllPostsForHome } from "../lib/api";
 
 const Home = async () => {
   // const [showMenu, toggleShowMenu] = useState(false);
