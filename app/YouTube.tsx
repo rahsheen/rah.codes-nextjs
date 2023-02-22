@@ -1,7 +1,7 @@
 type Props = {
   channelId: string;
   apiKey?: string;
-  revalidate: number;
+  revalidate?: number;
 };
 
 export default async function YouTubeVideo({

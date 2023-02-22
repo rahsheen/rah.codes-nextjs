@@ -2,8 +2,9 @@
 
 import { BlogItem } from "../components/blog-item";
 import { SimpleGrid } from "@chakra-ui/react";
+import { ApiPostPost } from "../schemas";
 
-export const BlogPosts = ({ posts }) => {
+export const BlogPosts = ({ posts }: { posts: ApiPostPost[] }) => {
   return posts?.length ? (
     <SimpleGrid minChildWidth="120px" spacing="4vmin">
       {posts.map(({ attributes }) => {

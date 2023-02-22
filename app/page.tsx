@@ -21,6 +21,7 @@ const Home = async () => {
   return (
     <>
       <CallToActionWithVideo>
+        {/* @ts-expect-error Server Component */}
         <LatestVideo
           apiKey={process.env.GOOGLE_API_KEY}
           channelId={"UCy3jFrt6CwE0W072c7MVcEg"}
